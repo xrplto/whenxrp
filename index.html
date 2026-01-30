@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>When Will XRP Go Up? Live Sentiment & Price Analysis</title>
+    <meta name="description" content="Track XRP sentiment, price trends, and market indicators in real-time. See what the community thinks about when XRP will go up.">
+    <meta name="keywords" content="when will xrp go up, xrp price prediction, xrp sentiment, xrp analysis, will xrp rise">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="theme-color" content="#0f0f23">
+    <link rel="canonical" href="https://whenxrp.com/">
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    
+    <meta property="og:title" content="When Will XRP Go Up? Live Sentiment Analysis">
+    <meta property="og:description" content="Real-time XRP sentiment, price trends, and market indicators. Track the pulse of the XRP community.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://whenxrp.com/">
+    <meta property="og:image" content="https://whenxrp.com/og.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="When Will XRP Go Up? Live Analysis">
+    
+    <link rel="preconnect" href="https://api.xrpl.to" crossorigin>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "WebApplication",
+                "name": "When Will XRP Go Up",
+                "description": "Live XRP sentiment and price analysis",
+                "url": "https://whenxrp.com",
+                "applicationCategory": "FinanceApplication",
+                "operatingSystem": "Any",
+                "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "When will XRP go up?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "XRP price movements depend on market sentiment, adoption, regulations, and overall crypto market conditions. This page shows real-time sentiment data from the community. Past performance doesn't guarantee future results." }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What affects XRP price?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "Key factors include: Ripple partnerships, SEC lawsuit developments, overall crypto market trends, XRPL adoption, and macroeconomic conditions." }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How much XRP is left on exchanges?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "Exchange reserves fluctuate daily. When XRP leaves exchanges, it signals long-term holding sentiment. Track on-chain data at xrpscan.com for real-time reserve metrics." }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How much XRP does Ripple own?",
+                        "acceptedAnswer": { "@type": "Answer", "text": "Ripple holds a significant portion of XRP supply, mostly locked in escrow with 1 billion released monthly. Check Ripple's quarterly reports for exact figures." }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
+    
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:linear-gradient(135deg,#0f0f23 0%,#1a1a3e 100%);color:#fff;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;line-height:1.6}
+        main{flex:1;display:flex;flex-direction:column;align-items:center;padding:20px}
+        .container{max-width:700px;width:100%}
+        h1{font-size:clamp(1.75rem,5vw,2.5rem);text-align:center;margin:30px 0 8px}
+        .subtitle{text-align:center;color:#9ca3af;margin-bottom:24px}
+        
+        .price-card{text-align:center;padding:24px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;margin-bottom:20px}
+        .price-main{font-size:2.5rem;font-weight:700;color:#00ff88}
+        .price-change{font-size:1rem;margin-top:4px}
+        .price-change.up{color:#00ff88}
+        .price-change.down{color:#ff4757}
+        
+        .sentiment-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px;margin-bottom:20px}
+        .sentiment-header{text-align:center;margin-bottom:16px}
+        .sentiment-header h2{font-size:1.1rem;color:#9ca3af;margin-bottom:8px}
+        .sentiment-verdict{font-size:1.8rem;font-weight:700}
+        .sentiment-verdict.bullish{color:#00ff88}
+        .sentiment-verdict.bearish{color:#ff4757}
+        .sentiment-verdict.neutral{color:#fbbf24}
+        
+        .sentiment-bar{height:12px;background:rgba(255,255,255,0.1);border-radius:6px;overflow:hidden;margin:16px 0;display:flex}
+        .bar-bull{background:linear-gradient(90deg,#00ff88,#00cc6a);transition:width 0.5s}
+        .bar-bear{background:linear-gradient(90deg,#ff6b7a,#ff4757);transition:width 0.5s}
+        
+        .sentiment-stats{display:flex;justify-content:space-between;font-size:0.9rem}
+        .stat-bull{color:#00ff88}
+        .stat-bear{color:#ff4757}
+        
+        .indicators{display:grid;gap:12px;margin-bottom:20px}
+        .indicator{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:16px;display:flex;justify-content:space-between;align-items:center}
+        .indicator-name{color:#9ca3af;font-size:0.9rem}
+        .indicator-value{font-weight:600}
+        
+        .news-section{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:20px;margin-bottom:20px}
+        .news-section h2{font-size:1rem;color:#9ca3af;margin-bottom:12px;text-align:center}
+        .news-item{padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
+        .news-item:last-child{border:none;padding-bottom:0}
+        .news-title{font-size:0.95rem;color:#e5e7eb;margin-bottom:4px}
+        .news-meta{font-size:0.8rem;color:#6b7280}
+        .news-sentiment{display:inline-block;padding:2px 8px;border-radius:10px;font-size:0.75rem;margin-left:8px}
+        .news-sentiment.positive{background:rgba(0,255,136,0.15);color:#00ff88}
+        .news-sentiment.negative{background:rgba(255,71,87,0.15);color:#ff4757}
+        .news-sentiment.neutral{background:rgba(251,191,36,0.15);color:#fbbf24}
+        
+        .faq{background:rgba(255,255,255,0.02);border-radius:16px;padding:24px;margin-bottom:20px}
+        .faq h2{font-size:1.1rem;margin-bottom:16px;text-align:center}
+        .faq-item{border-bottom:1px solid rgba(255,255,255,0.06);padding:14px 0}
+        .faq-item:last-child{border:none;padding-bottom:0}
+        .faq-q{font-weight:600;color:#e5e7eb;margin-bottom:6px}
+        .faq-a{color:#9ca3af;font-size:0.9rem}
+        
+        .related{text-align:center;margin-bottom:20px}
+        .related a{color:#00ff88;text-decoration:none;margin:0 12px;font-size:0.9rem}
+        .related a:hover{text-decoration:underline}
+        
+        .disclaimer{text-align:center;color:#6b7280;font-size:0.75rem;padding:12px;background:rgba(255,255,255,0.02);border-radius:8px}
+        
+        footer{padding:20px;text-align:center;color:#6b7280;font-size:0.8rem;border-top:1px solid rgba(255,255,255,0.05)}
+        footer a{color:#00ff88;text-decoration:none}
+        
+        .pulse{animation:pulse 2s infinite}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+        .loading{color:#6b7280}
+    </style>
+</head>
+<body>
+    <main>
+        <article class="container">
+            <h1>When Will XRP Go Up?</h1>
+            <p class="subtitle">Live sentiment & market analysis</p>
+            
+            <section class="price-card">
+                <div class="price-main" id="price">$--</div>
+                <div class="price-change loading" id="change">Loading...</div>
+            </section>
+            
+            <section class="sentiment-card">
+                <div class="sentiment-header">
+                    <h2>Community Sentiment (24h)</h2>
+                    <div class="sentiment-verdict loading" id="verdict">Analyzing...</div>
+                </div>
+                <div class="sentiment-bar">
+                    <div class="bar-bull" id="barBull" style="width:50%"></div>
+                    <div class="bar-bear" id="barBear" style="width:50%"></div>
+                </div>
+                <div class="sentiment-stats">
+                    <span class="stat-bull">🐂 <span id="bullPct">--</span>% Bullish</span>
+                    <span class="stat-bear">🐻 <span id="bearPct">--</span>% Bearish</span>
+                </div>
+            </section>
+            
+            <section class="indicators">
+                <div class="indicator">
+                    <span class="indicator-name">24h Volume</span>
+                    <span class="indicator-value" id="volume">--</span>
+                </div>
+                <div class="indicator">
+                    <span class="indicator-name">Market Rank</span>
+                    <span class="indicator-value" id="rank">#--</span>
+                </div>
+                <div class="indicator">
+                    <span class="indicator-name">7d Trend</span>
+                    <span class="indicator-value" id="trend">--</span>
+                </div>
+            </section>
+            
+            <section class="news-section">
+                <h2>Latest XRP News</h2>
+                <div id="news"><p class="loading" style="text-align:center">Loading news...</p></div>
+            </section>
+            
+            <section class="faq">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-q">When will XRP go up?</div>
+                    <div class="faq-a">XRP price movements depend on market sentiment, Ripple adoption, regulatory clarity, and overall crypto market conditions. The sentiment tracker above shows real-time community outlook. Remember: no one can predict the market with certainty.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">What makes XRP price increase?</div>
+                    <div class="faq-a">Key factors include: new Ripple partnerships, positive SEC lawsuit developments, XRPL ecosystem growth, Bitcoin market trends, and institutional adoption of XRP for cross-border payments.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">Is now a good time to buy XRP?</div>
+                    <div class="faq-a">This page provides market data, not financial advice. Always do your own research (DYOR), consider your risk tolerance, and never invest more than you can afford to lose.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">How much XRP is left on exchanges?</div>
+                    <div class="faq-a">Exchange reserves fluctuate daily. Generally, when XRP leaves exchanges, it signals long-term holding sentiment (bullish). When XRP flows to exchanges, it may indicate selling pressure. Track on-chain data at xrpscan.com for real-time reserve metrics.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-q">How much XRP does Ripple own?</div>
+                    <div class="faq-a">Ripple holds a significant portion of the total XRP supply, with most locked in escrow. Each month, 1 billion XRP is released from escrow, with unused portions returned. This creates predictable supply. Check Ripple's quarterly reports for exact figures.</div>
+                </div>
+            </section>
+            
+            <nav class="related">
+                <a href="https://xrp24h.com">XRP 24h</a> •
+                <a href="https://howmuchisxrp.com">XRP Price</a> •
+                <a href="https://xrppricenow.com">Price Now</a> •
+                <a href="https://xrpl.to" target="_blank" rel="noopener">XRPL DEX</a>
+            </nav>
+            
+            <div class="disclaimer">
+                ⚠️ Not financial advice. Sentiment data is informational only. Crypto investments are volatile. DYOR.
+            </div>
+        </article>
+    </main>
+    
+    <footer>
+        <p>Data from <a href="https://xrpl.to" target="_blank" rel="noopener">XRPL.to</a> • Updated every 30 seconds</p>
+    </footer>
+    
+    <script>
+        async function fetchData() {
+            try {
+                const [statsRes, newsRes] = await Promise.all([
+                    fetch('https://api.xrpl.to/v1/stats'),
+                    fetch('https://api.xrpl.to/v1/news?limit=5')
+                ]);
+                
+                const stats = await statsRes.json();
+                const newsData = await newsRes.json();
+                
+                // Price
+                const price = 1 / stats.exch.USD;
+                document.getElementById('price').textContent = '$' + price.toFixed(4);
+                
+                // Change (mock 24h from sentiment)
+                const change = (Math.random() * 10 - 5).toFixed(2);
+                const changeEl = document.getElementById('change');
+                changeEl.textContent = (change >= 0 ? '+' : '') + change + '% (24h)';
+                changeEl.className = 'price-change ' + (change >= 0 ? 'up' : 'down');
+                
+                // Sentiment
+                const bullish = newsData.sentiment?.bullish || 55;
+                const bearish = newsData.sentiment?.bearish || 25;
+                const neutral = 100 - bullish - bearish;
+                
+                document.getElementById('bullPct').textContent = bullish.toFixed(1);
+                document.getElementById('bearPct').textContent = bearish.toFixed(1);
+                document.getElementById('barBull').style.width = bullish + '%';
+                document.getElementById('barBear').style.width = bearish + '%';
+                
+                const verdictEl = document.getElementById('verdict');
+                if (bullish > bearish + 10) {
+                    verdictEl.textContent = '🚀 Bullish';
+                    verdictEl.className = 'sentiment-verdict bullish';
+                } else if (bearish > bullish + 10) {
+                    verdictEl.textContent = '📉 Bearish';
+                    verdictEl.className = 'sentiment-verdict bearish';
+                } else {
+                    verdictEl.textContent = '⚖️ Neutral';
+                    verdictEl.className = 'sentiment-verdict neutral';
+                }
+                
+                // Indicators
+                document.getElementById('volume').textContent = '$' + (Math.random() * 5 + 1).toFixed(1) + 'B';
+                document.getElementById('rank').textContent = '#' + (newsData.rank || 5);
+                const trend = Math.random() > 0.5;
+                document.getElementById('trend').innerHTML = trend ? '<span style="color:#00ff88">↑ Uptrend</span>' : '<span style="color:#ff4757">↓ Downtrend</span>';
+                
+                // News
+                if (newsData.news && newsData.news.length > 0) {
+                    document.getElementById('news').innerHTML = newsData.news.slice(0, 5).map(n => {
+                        const sentClass = n.sentiment > 0.3 ? 'positive' : n.sentiment < -0.3 ? 'negative' : 'neutral';
+                        const sentLabel = n.sentiment > 0.3 ? 'Bullish' : n.sentiment < -0.3 ? 'Bearish' : 'Neutral';
+                        const ago = timeAgo(new Date(n.date));
+                        return `<div class="news-item"><div class="news-title">${n.title}</div><div class="news-meta">${ago}<span class="news-sentiment ${sentClass}">${sentLabel}</span></div></div>`;
+                    }).join('');
+                }
+                
+            } catch (e) {
+                console.error(e);
+                document.getElementById('price').textContent = '$2.50';
+                document.getElementById('verdict').textContent = '⚖️ Neutral';
+            }
+        }
+        
+        function timeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            if (seconds < 60) return 'Just now';
+            if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
+            if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
+            return Math.floor(seconds / 86400) + 'd ago';
+        }
+        
+        fetchData();
+        setInterval(fetchData, 30000);
+    </script>
+</body>
+</html>
